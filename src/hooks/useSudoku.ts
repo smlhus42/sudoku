@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { generateSudoku, SudokuBoard, isSolved, isValidBoard } from '../utils/sudokuUtils'
 import { socketService } from '../services/socketService'
 

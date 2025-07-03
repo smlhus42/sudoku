@@ -131,7 +131,7 @@ export function useGameState() {
   /**
    * Handle player finished from WebSocket
    */
-  const handlePlayerFinished = (playerId: string, playerName: string, finishedAt: Date) => {
+  const handlePlayerFinished = (playerId: string, _playerName: string, finishedAt: Date) => {
     setGameState(prev => ({
       ...prev,
       players: prev.players.map(player =>
@@ -193,7 +193,7 @@ export function useGameState() {
   /**
    * Handle player disconnected from WebSocket
    */
-  const handlePlayerDisconnected = (playerId: string, playerName: string) => {
+  const handlePlayerDisconnected = (playerId: string, _playerName: string) => {
     setGameState(prev => ({
       ...prev,
       players: prev.players.map(player =>
@@ -207,7 +207,7 @@ export function useGameState() {
   /**
    * Handle player left from WebSocket
    */
-  const handlePlayerLeft = (playerId: string, playerName: string) => {
+  const handlePlayerLeft = (playerId: string, _playerName: string) => {
     setGameState(prev => ({
       ...prev,
       players: prev.players.filter(player => player.id !== playerId)
@@ -220,20 +220,6 @@ export function useGameState() {
   const handleError = (message: string) => {
     console.error('WebSocket error:', message)
     setConnectionError(message)
-  }
-
-  /**
-   * Generer en tilfeldig game ID
-   */
-  const generateGameId = (): string => {
-    return Math.random().toString(36).substr(2, 8).toUpperCase()
-  }
-
-  /**
-   * Generer en tilfeldig player ID
-   */
-  const generatePlayerId = (): string => {
-    return Math.random().toString(36).substr(2, 12)
   }
 
   /**

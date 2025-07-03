@@ -1,0 +1,21 @@
+# Ignore frontend files
+src/
+dist/
+node_modules/
+*.html
+*.css
+*.ts
+*.tsx
+!server/
+
+# Ignore config files not needed for server
+vite.config.ts
+tailwind.config.js
+postcss.config.js
+tsconfig.json
+tsconfig.node.json
+
+# Ignore documentation
+README.md
+DEPLOYMENT.md
+WEBSOCKET_GUIDE.md 

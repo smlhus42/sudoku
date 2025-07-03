@@ -5,12 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npx tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "build:server": "cd server && npm install",
-    "start": "cd server && npm start",
-    "deploy": "npm run build && npm run build:server && npm run start"
+    "start": "cd server && npm start"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.3",

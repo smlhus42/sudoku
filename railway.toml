@@ -1,9 +1,8 @@
 [build]
-buildCommand = "npm run build && npm run build:server"
+buildCommand = "npm install && npm run build && npm run build:server"
 
 [deploy]
 startCommand = "npm run start"
 
-[[services]]
-name = "war-of-numbers"
-source = "." 
+[environment]
+NODE_ENV = "production" 

@@ -1,0 +1,9 @@
+[build]
+buildCommand = "npm run build && npm run build:server"
+
+[deploy]
+startCommand = "npm run start"
+
+[[services]]
+name = "war-of-numbers"
+source = "." 

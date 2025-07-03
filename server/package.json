@@ -1,0 +1,32 @@
+{
+  "name": "war-of-numbers-server",
+  "version": "1.0.0",
+  "description": "Backend server for War of Numbers multiplayer Sudoku game",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.5",
+    "cors": "^2.8.5",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "websocket",
+    "sudoku",
+    "multiplayer",
+    "game",
+    "real-time"
+  ],
+  "author": "War of Numbers Team",
+  "license": "MIT"
+} 

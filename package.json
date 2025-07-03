@@ -8,7 +8,7 @@
     "build": "npm install --omit=dev --prefix server",
     "build:frontend": "node ./node_modules/vite/bin/vite.js build",
     "build:server": "npm install --omit=dev --prefix server",
-    "start": "node server/index.js",
+    "start": "node server.js",
     "start:frontend": "vite preview",
     "start:server": "cd server && npm start",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

@@ -2,7 +2,7 @@
 buildCommand = "npm install --prefix server"
 
 [deploy]
-startCommand = "node debug-server.js"
+startCommand = "node server.js"
 
 [environment]
 NODE_ENV = "production"

@@ -1,8 +1,8 @@
 [build]
-buildCommand = "npm install --omit=dev --prefix server"
+buildCommand = "npm install --prefix server"
 
 [deploy]
-startCommand = "node server/index.js"
+startCommand = "cd server && npm start"
 
 [environment]
 NODE_ENV = "production"

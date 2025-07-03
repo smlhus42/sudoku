@@ -1,14 +1,16 @@
 {
-  "name": "sudoku-generator",
+  "name": "war-of-numbers-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx vite build && npm run build:server",
-    "build:client": "npx vite build",
+    "build": "npx vite build",
+    "build:frontend": "npx vite build",
     "build:server": "cd server && npm install --production",
     "start": "cd server && npm start",
+    "start:frontend": "vite preview",
+    "start:server": "cd server && npm start",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

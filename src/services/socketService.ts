@@ -2,35 +2,35 @@ import { io, Socket } from 'socket.io-client'
 import { SudokuBoard } from '../utils/sudokuUtils'
 import { Difficulty } from '../hooks/useSudoku'
 
+// Environment variables for deployment
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:3001'
+
 export interface SocketGameState {
   id: string
   phase: 'lobby' | 'playing' | 'finished'
-  difficulty: Difficulty
+  difficulty: string
   players: Array<{
     id: string
     name: string
     isConnected: boolean
     cellsRemaining: number
-    finishedAt?: Date
-    isHost: boolean
-    isSolved: boolean
+    finishedAt?: string
   }>
-  createdAt: Date
-  startedAt?: Date
-  finishedAt?: Date
+  createdAt: string
+  startedAt?: string
 }
 
 export interface SocketPlayerData {
   id: string
-  board: SudokuBoard
-  originalBoard: SudokuBoard
+  board: number[][]
+  originalBoard: number[][]
 }
 
 class SocketService {
   private socket: Socket | null = null
-  private serverUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:3001'
-    : window.location.origin // Use same origin in production
+  private serverUrl = SOCKET_URL
+  private apiUrl = API_URL
   
   // Event callbacks
   private onGameStateCallback?: (gameState: SocketGameState, playerData: SocketPlayerData) => void
@@ -134,10 +134,10 @@ class SocketService {
    */
   async createGame(difficulty: Difficulty, playerName: string): Promise<{ gameId: string, playerId: string }> {
     console.log('🚀 SocketService: Sending request to create game:', { difficulty, playerName })
-    console.log('🌐 Server URL:', this.serverUrl)
+    console.log('🌐 Server URL:', this.apiUrl)
     
     try {
-      const response = await fetch(`${this.serverUrl}/api/game/create`, {
+      const response = await fetch(`${this.apiUrl}/api/game/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -166,7 +166,7 @@ class SocketService {
    * API: Koble til eksisterende spill
    */
   async joinGame(gameId: string, playerName: string): Promise<{ gameId: string, playerId: string }> {
-    const response = await fetch(`${this.serverUrl}/api/game/join/${gameId}`, {
+    const response = await fetch(`${this.apiUrl}/api/game/join/${gameId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

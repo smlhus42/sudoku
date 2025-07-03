@@ -10,29 +10,40 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// Environment variables
+const PORT = process.env.PORT || 3001
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173"
+const NODE_ENV = process.env.NODE_ENV || 'development'
+
+console.log(`🌍 Environment: ${NODE_ENV}`)
+console.log(`🔗 CORS Origin: ${FRONTEND_URL}`)
+console.log(`📡 Server Port: ${PORT}`)
+
 const app = express()
 const server = createServer(app)
 
-// Socket.io med CORS-støtte
+// Socket.io med environment-basert CORS
 const io = new Server(server, {
   cors: {
-    origin: process.env.NODE_ENV === 'production' ? false : ["http://localhost:5173", "http://localhost:3000"],
-    methods: ["GET", "POST"]
+    origin: NODE_ENV === 'production' ? FRONTEND_URL : ["http://localhost:5173", "http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 })
 
-// Middleware
+// CORS middleware
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? false : ["http://localhost:5173", "http://localhost:3000"],
+  origin: NODE_ENV === 'production' ? FRONTEND_URL : ["http://localhost:5173", "http://localhost:3000"],
   credentials: true
 }))
+
 app.use(express.json())
 
-// Serve static files in production
-if (process.env.NODE_ENV === 'production') {
+// Serve static files kun i development (produksjon håndteres av Vercel)
+if (NODE_ENV === 'development') {
   app.use(express.static(path.join(__dirname, '../dist')))
   
-  app.get('*', (req, res) => {
+  app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'))
   })
 }
@@ -293,10 +304,8 @@ io.on('connection', (socket) => {
   })
 })
 
-const PORT = process.env.PORT || 3001
-
 server.listen(PORT, () => {
   console.log(`🚀 War of Numbers Server running on port ${PORT}`)
-  console.log(`🌐 Frontend URL: http://localhost:5173`)
+  console.log(`🌐 Frontend URL: ${FRONTEND_URL}`)
   console.log(`🔍 Health check: http://localhost:${PORT}/health`)
 }) 

@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx vite build",
-    "build:check": "npx tsc && npx vite build",
+    "build": "npx vite build && npm run build:server",
+    "build:client": "npx vite build",
+    "build:server": "cd server && npm install --production",
+    "start": "cd server && npm start",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "build:server": "cd server && npm install",
-    "start": "cd server && npm start"
+    "preview": "vite preview"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.3",
@@ -33,5 +33,9 @@
     "tailwindcss": "^3.3.6",
     "typescript": "^5.3.3",
     "vite": "^5.4.10"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }

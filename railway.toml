@@ -1,8 +1,0 @@
-[build]
-buildCommand = "npm install --no-audit && npm run build && npm run build:server"
-
-[deploy]
-startCommand = "npm run start"
-
-[environment]
-NODE_ENV = "production" 
